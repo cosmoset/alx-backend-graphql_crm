@@ -5,14 +5,13 @@ from datetime import datetime, timedelta
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
 
-# Default log file path
+
 DEFAULT_LOG_FILE = '/tmp/order_reminders_log.txt'
 
-# Set up the GraphQL client
+
 transport = RequestsHTTPTransport(url='http://localhost:8000/graphql')
 client = Client(transport=transport, fetch_schema_from_transport=True)
 
-# GraphQL query to get recent orders
 query = gql("""
     query GetRecentOrders($lastWeek: DateTime!) {
         orders(orderDate_Gte: $lastWeek) {
